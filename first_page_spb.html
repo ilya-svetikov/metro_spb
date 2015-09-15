@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/stylesheet.css">
+    <meta charset="UTF-8">
+    <title>Карта метро Санкт-Петербурга</title>
+    </head>
+    <body>
+    <div id="welcome" class="container">
+        <div class="starter-template">
+            <h1>Метро Санкт-Петербурга</h1>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Saint_Petersburg_metro_map_RUS.png"  id="image" class="img-thumbnail">
+    </div>
+        <p id="warning"> Будьте внимательны, станции Выборгская и Василеостровская закрыты на ремонт!
+        </p>
+        <form class="bs-docs-example" method="POST" action="main.py">
+          <p> Выберите станцию отправления и прибытия.</p>
+                <p><input type ="text" name="first" placeholder="Станция отправления" list="stations_list" required autocomplete="off" autocorrect="off"></p>
+                <p><input type="text" name="second" placeholder="Станция пребытия"list="stations_list" required autocomplete="off" autocorrect="off"></p>
+                <div> <input type="submit" value="Проложить маршрут"> </div>
+                <datalist id="stations_list">
+                    <option>Автово</option>
+                    <option>Адмиралтейская</option>
+                    <option>Академическая</option>
+                    <option>Балтийская</option>
+                    <option>Бухарестская</option>
+                    <option>Василеостровская</option>
+                    <option>Владимирская</option>
+                    <option>Волковская</option>
+                    <option>Выборгская</option>
+                    <option>Горьковская</option>
+                    <option>Гостиный двор</option>
+                    <option>Гражданский проспект</option>
+                    <option>Девяткино</option>
+                    <option>Достоевская</option>
+                    <option>Елизаровская</option>
+                    <option>Звенигородская</option>
+                    <option>Звёздная</option>
+                    <option>Кировский завод</option>
+                    <option>Комендантский проспект</option>
+                    <option>Крестовский остров</option>
+                    <option>Купчино</option>
+                    <option>Ладожская</option>
+                    <option>Ленинский проспект</option>
+                    <option>Лесная</option>
+                    <option>Лиговский проспект</option>
+                    <option>Ломоносовская</option>
+                    <option>Маяковская</option>
+                    <option>Международная</option>
+                    <option>Московская</option>
+                    <option>Московские ворота</option>
+                    <option>Нарвская</option>
+                    <option>Невский проспект</option>
+                    <option>Новочеркасская</option>
+                    <option>Обводный канал</option>
+                    <option>Обухово</option>
+                    <option>Озерки</option>
+                    <option>Парк Победы</option>
+                    <option>Парнас</option>
+                    <option>Петроградская</option>
+                    <option>Пионерская</option>
+                    <option>Площадь Александра Невского 1</option>
+                    <option>Площадь Александра Невского 2</option>
+                    <option>Площадь Восстания</option>
+                    <option>Площадь Ленина</option>
+                    <option>Площадь Мужества</option>
+                    <option>Политехническая</option>
+                    <option>Приморская</option>
+                    <option>Пролетарская</option>
+                    <option>Проспект Большевиков</option>
+                    <option>Проспект Ветеранов</option>
+                    <option>Проспект Просвещения</option>
+                    <option>Пушкинская</option>
+                    <option>Рыбацкое</option>
+                    <option>Садовая</option>
+                    <option>Сенная площадь</option>
+                    <option>Спасская</option>
+                    <option>Спортивная</option>
+                    <option>Старая Деревня</option>
+                    <option>Технологический институт 1</option>
+                    <option>Технологический институт 2</option>
+                    <option>Удельная</option>
+                    <option>Улица Дыбенко</option>
+                    <option>Фрунзенская</option>
+                    <option>Чернышевская</option>
+                    <option>Чкаловская</option>
+                    <option>Чёрная речка</option>
+                    <option>Электросила</option>
+                </datalist>
+				{% if closed(first, second) %}
+				    <p> Станция закрыта </p>
+				{% else %}
+                    {% if check %}
+                        <p class="answer"> Не получается проложить маршрут</p>
+                    {% else %}
+				        {% if first %} 
+                            <p>Вам ехать {{Result}} мин.</p>
+						    <p>Ваш маршрут: </p>
+						    {% for stop in way %}
+                                <li><p> {{stop}} </p></li>
+						    {% endfor %}
+					    {% endif %}
+                    {% endif %}
+				{% endif %}
+    <div class="col-xs-6">
+        <div id='article'>
+                    <p>Петербургский метрополитен – второй в России по протяженности после московского. </p>
+            <p>Он открылся в 1955 году. Сегодня функционирует 5 линий метро, общая протяженность которых – 113.6 километров. Схема метро Санкт-Петербурга (СПб) достаточно простая и разобраться в ней может практически каждый.</p>
+            <p>Петербургское метро считается самым глубоким в мире. Многие из станций имеют оригинальное архитектурно-художественное оформление.</p>
+            <p>Например, стены станции Кировский завод украшены мрамором и барельефами. Само наземное здание имеет широкую лестницу, массивные колонны и напоминает дворец или храм. А на Пушкинской станции находится памятник А.С. Пушкину. Этот памятник положил начало традиции устанавливать памятники великим людям в метро. Необычная и интересная станция Автово – её колонны украшены декоративным стеклом, его специальная огранка создает эффект свечения колонн изнутри.</p>
+            <p>На данный момент сеть метрополитена Питера не достаточно развита. Но, к сожалению, до 2018 года открытия новых станций не планируется в виду отсутствия средств на это.</p>
+            <p>Желаем вам удачной поездки!</p>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
